@@ -1,8 +1,5 @@
-<?php
-
-        $connect =mysqli_connect('localhost','root','aodalsgh1','bulletin');
-
-      
+<?php if(TRUE) :
+       include "conn/connect.php";
         $sql = "UPDATE list set content='{$_POST[content]}',
         subject='{$_POST[subject]}',regist_day=NOW() where  num=$_GET[num]";
         $result = mysqli_multi_query($connect,$sql);
@@ -10,13 +7,15 @@
       
         if($result == FALSE)
         {
-          Header("modify_form.php");  
+          Header("Location:../modify_form.php");  
           echo $sql;
+          exit;
         }
         else
         {
-           Header("Location:list.php");  
+          mysqli_query($sql, $connect);
+           mysqli_close(); 
+           Header("Location:../list.php");  
+           exit;
         }
-        mysqli_query($sql, $connect);
-        mysqli_close(); 
-?>
+?> <?php endif ?>

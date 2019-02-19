@@ -37,7 +37,7 @@
 
    <div align="center"> 
 
-<?php
+<?php if(TRUE) :
     $case=$_GET['case'];
    if ($case == "modify")
    {
@@ -50,10 +50,10 @@
               //  action='delete.php?num=$num&page=$page'>";
 
               echo "<form name=pwform method=post 
-              action='delete.php?num=$_GET[num]'>";          
+              action='mysql/delete.php?num=$_GET[num]'>";          
       }
 
-?>
+?> <?php endif ?>
 
     <table cellpadding="0" cellspacing="0" border="0" width="306">
         <tr height=1 bgcolor="#292E5F">

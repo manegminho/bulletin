@@ -1,13 +1,13 @@
 
-<?php
+<?php if(TRUE) : 
   
-  $connect =mysqli_connect('localhost','root','aodalsgh1','bulletin');
+  include "mysql/conn/connect.php";
   
   if(isset($_GET['num']))
   {
   
     $filtered_id =mysqli_real_escape_string($connect, $_GET['num']);
-    $sql = "select * from list where num={$filtered_id}";
+    $sql = "select subject,name,regist_day,subject,content,hit from list where num={$filtered_id}";
     $result = mysqli_query($connect,$sql);
   }
    $row = mysqli_fetch_array($result);
@@ -20,7 +20,7 @@
    $sql = "UPDATE list set hit=$nCount where  num=$_GET[num]";
    $result = mysqli_multi_query($connect,$sql);
    
-?>
+?><?php endif ?>
 
 <html>
  <head>
@@ -82,15 +82,15 @@
           <td></td>
         </tr>
 
-<?php
-   if ($userid == "admin")
+<?php if ($userid == "admin") :
+   
    {
       echo "
         <tr>
           <td align=center>
-          <a href='modify_form.php?num=$row[num]'>
+          <a href='modify_form.php?num=$_GET[num]'>
                            <img src='img/i_edit.gif' border=0>&nbsp</a>
-          <a href='delete.php?num=$row[num]'>
+          <a href='delete.php?num=$_GET[num]'>
                            <img src='img/i_del.gif' border=0>&nbsp</a>
           <a href='list.php>
                            <img src='img/i_list.gif' border=0></a>
@@ -98,14 +98,15 @@
         </tr>
            ";
    }
-   else
+   ?>
+<?php else: 
    {
       echo "
         <tr>
           <td align=center>
-          <a href='passwd_form.php?case=modify&num=$row[num]'>
+          <a href='passwd_form.php?case=modify&num=$_GET[num]'>
                            <img src='img/i_edit.gif' border=0>&nbsp</a>
-          <a href='passwd_form.php?case=delete&num=$row[num]'>
+          <a href='passwd_form.php?case=delete&num=$_GET[num]'>
                            <img src='img/i_del.gif' border=0>&nbsp</a>
           <a href='list.php'>
                            <img src='img/i_list.gif' border=0></a>
@@ -114,6 +115,7 @@
            ";
    }
 ?>
+<?php endif ?>
 
           </td>
     </table>

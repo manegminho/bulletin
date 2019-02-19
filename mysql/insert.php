@@ -1,6 +1,6 @@
-<?php
+<?php if(TRUE) :
 
-$connect =mysqli_connect('localhost','root','aodalsgh1','bulletin');
+      include "conn/connect.php";
      $regist_day = date("Y-m-d (H:i)");  
 
      $sql = "Select *from list";
@@ -25,13 +25,14 @@ $connect =mysqli_connect('localhost','root','aodalsgh1','bulletin');
       $result=mysqli_query($connect,$sql);
       if($result == FALSE)
       {
-        Header("write_form.php");  
+        Header("Location:../write_form.php");  
         echo $sql;
       }
       else
       {
-         Header("Location:list.php");  
+         Header("Location:../list.php");  
       }
       mysqli_query($sql, $connect);
       mysqli_close();  
 ?>
+<?php endif ?>

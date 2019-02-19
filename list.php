@@ -1,9 +1,10 @@
-<?php
-        $scale=5; //한 화면에  표시되는 글수
-        $connect =mysqli_connect("localhost","root","aodalsgh1","bulletin");
-        $sql = "select * from list";
+<?php if(TRUE)  :
+        include "mysql/conn/connect.php";
+        $sql = "select num,subject,name,regist_day,hit from list";
         $result = mysqli_query($connect, $sql);
 ?>
+<?php endif ?>
+
 <html>
     <meta http-equiv="Content-Type" content="text/html; charset=Korean">
     <head>
@@ -20,7 +21,7 @@
          </td></tr>
          <tr><td height=10></td></tr>
 
-         <?php  $total_record = mysqli_num_rows($result); // ��ü �� ��?>
+         <?php if(TRUE) : $total_record = mysqli_num_rows($result); // ��ü �� ��?> <?php endif ?>
               <tr>
                  <td align="right" colspan="5" height=20><b>전체 
                    <?php echo $total_record ?>건</b>
@@ -44,11 +45,7 @@
          </tr>     
        
          
-    <?php
-           $connect =mysqli_connect("localhost","root","aodalsgh1","bulletin");
-           $sql = "Select *from list";
-           $result = mysqli_query($connect,$sql);
-
+    <?php if(TRUE) :
            $ncount =0;
            while($row = mysqli_fetch_array($result))
            {
@@ -67,7 +64,7 @@
            }
            
 
-    ?>
+    ?> <?php endif ?>
 
         <tr> 
           <td colspan="5" height=20></td>
@@ -75,7 +72,7 @@
 
         <tr height=25>
           <td colspan=5 align=center>
-    <?php
+    <?php if(TRUE) :
             //게시판 목록하단에 페이지링크 번호 출력
 
             for($i=1 ; $i<$total_page;$i++)
@@ -91,7 +88,7 @@
                 }
             }
             echo "1";
-    ?>
+    ?> <?php endif ?>
 
         </td>
         </tr>

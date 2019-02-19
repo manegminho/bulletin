@@ -1,13 +1,10 @@
-<?php
-
-$connect =mysqli_connect('localhost','root','aodalsgh1','bulletin');
-
-$sql = "select * from list where $_POST[find] like '%$_POST[search]%'";
-
-
+<?php if(TRUE) :
+include "mysql/conn/connect.php";
+//$sql = "select * from list where $_POST[find] like '%$_POST[search]%'";
+$sql = "select num,subject,name,regist_day,hit from list where $_POST[find] like '%$_POST[search]%'";
 $result = mysqli_query($connect,$sql);
+?> <?php endif ?>
 
-?>
 <html>
 <META http-equiv="Content-Type" content="text/html; charset=Korean">
  <head>
@@ -23,8 +20,8 @@ $result = mysqli_query($connect,$sql);
           </td></tr>
         <tr><td height=10></td></tr>
 
-<?php  $total_record = mysqli_num_rows($result); // ��ü �� ��?>
-        <tr><td align="right" colspan="5" height=20>
+<?php if(TRUE) : $total_record = mysqli_num_rows($result); // ��ü �� ��?>  <?php endif ?>
+         <tr><td align="right" colspan="5" height=20>
            <b> 조회수 : <?php echo $total_record ?> </b>
           </td></tr>
         <tr>
@@ -45,9 +42,7 @@ $result = mysqli_query($connect,$sql);
          <td colspan="5" height=1></td>
         </tr>
   
-<?php
-   $result = mysqli_query($connect,$sql);
-
+<?php if(TRUE):
    $ncount =0;
    while($row = mysqli_fetch_array($result))
    {
@@ -63,7 +58,7 @@ $result = mysqli_query($connect,$sql);
        <td colspan='5'></td>
      </tr>";
    }
-?>
+?> <?php endif ?>
 
         <tr> 
           <td colspan="5" height=20></td>
@@ -71,7 +66,7 @@ $result = mysqli_query($connect,$sql);
 
         <tr height=25>
           <td colspan=5 align=center>
-<?php
+<?php if(TRUE) :
    // �Խ��� ��� �ϴܿ� ������ ��ũ ��ȣ ���
    for ($i=1; $i<=$total_page; $i++)
    {
@@ -89,7 +84,7 @@ $result = mysqli_query($connect,$sql);
            ";
      }      
    }
-?>
+?><?php endif ?>
           </td>
         </tr>
         <tr bgcolor="#CCCCCC" height=1> 

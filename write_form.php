@@ -9,7 +9,7 @@
 
     <table width=776 align=center border=0 cellspacing=0 
                cellpadding=0>
-       <form name="writeform" action="insert.php" method="POST">
+       <form name="writeform" action="mysql/insert.php" method="POST">
         <tr><td colspan="6" height=25>
               <img src="img/head.gif">
             </td></tr>

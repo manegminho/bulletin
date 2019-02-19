@@ -1,9 +1,8 @@
-<?php
-
-    $connect =mysqli_connect('localhost','root','aodalsgh1','bulletin');
+<?php if(TRUE):
+    include "mysql/conn/connect.php";
     $regist_day = date("Y-m-d (H:i)");  
 
-    $sql = "select * from list where num=$_GET[num]";
+    $sql = "select name,passwd,subject,content from list where num=$_GET[num]";
     $result = mysqli_query($connect,$sql);
     $row = mysqli_fetch_array($result);
 
@@ -12,14 +11,14 @@
     {
        echo "
           <script>
-              alert('비밀번호가 틀렸습니다.')
-              history.go(-1)
+              alert('비밀번호가 틀렸습니다.');
+              history.go(-1);
           </script>
        ";
        exit;
       
     } 
-?>
+?> <?php endif ?>
       
 <html>
  <head>
@@ -35,7 +34,7 @@
         </tr>
         <tr><td height=10></td></tr>
      <form name="modifyform" 
-         action="Update.php?num=<?= $row[num] ?>&content=<?= $row[content]?>" method="post">
+         action="mysql/Update.php?num=<?= $_GET[num] ?>&content=<?= $row[content]?>" method="post">
         <tr>
            <td align=center colspan=2>
     <table width=776 border=0 cellspacing=0 cellpadding=0 
@@ -88,13 +87,8 @@
         <tr><td height=2>&nbsp;&nbsp;</td> </tr>
         <tr valign="top">
           <td>&nbsp;&nbsp;<p2>내 용</p2>&nbsp;&nbsp;
-          
-          <textarea style='font-size:9pt;border:1px solid;align-content:left;margin:0px; padding:0px'
-                      name="content" style=background-image:url
-                           ('img/bbs_text_line.gif'); 
-                      cols=74 rows=14 wrap=virtual>
-                      <?= $row[content]?>
-           </textarea></td>
+         
+          <textarea style='font-size:9pt;border:1px solid;align-content:left;margin:0px; padding:0px'name="content" style=background-image:url('img/bbs_text_line.gif'); cols=74 rows=14 wrap=virtual><?= $row[content]?></textarea></td>
         </tr>
         <tr height=20>
           <td></td>
